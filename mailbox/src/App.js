@@ -1,6 +1,14 @@
 import './App.css';
 import 'antd/dist/antd.css';
-import {Row, Col, Layout } from 'antd';
+import {Row, Col, Layout , Tag, Avatar} from 'antd';
+import {
+  CheckCircleOutlined,
+  SyncOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+  ClockCircleOutlined,
+  MinusCircleOutlined,
+} from '@ant-design/icons';
 import MailBox from "./components/email/MailBox";
 import ModelSelector from "./components/email/ModelSelector";
 import {useState} from "react";
@@ -18,14 +26,28 @@ function App() {
 
   return (
      <Layout>
-         <Header>Header Name Here</Header>
+      <Header className="header">
+      <Row gutter={16}>
+      <Col className="gutter-row" span={6}>
+        <div><h1 style={{color:"white", "font-size":"40px", "text-align":"left"}}>Tag Tool 1.0</h1></div>
+      </Col>
+      <Col className="gutter-row" span={6}>
+      </Col>
+      <Col className="gutter-row" span={6}>
+      </Col>
+      <Col className="gutter-row" span={6}>
+        <div style={{"text-align":'right'}}><Avatar size={40}>USER</Avatar></div>
+      </Col>
+    </Row>
+    </Header>
          <Content>
              <div className="App">
                  <Row >
+                 <Col span={18}></Col>
                      <Col span={6}><ModelSelector onModelChange={handleModelChange} /></Col>
                  </Row>
                  <Row>
-                     <Col span={24}><MailBox currentModel={currentModel}/></Col>
+                     <Col span={24} style={{"text-align":"right"}}><MailBox currentModel={currentModel}/></Col>
                  </Row>
                  {/*  <Welcome/>*/}
              </div>

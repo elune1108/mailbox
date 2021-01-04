@@ -160,7 +160,6 @@ export default function MailBox(props) {
             title: 'Tags',
             dataIndex: 'h_tags',
             key: 'h_tags',
-            width: '40%',
             render: (h_tags, record) => (
 
                 <Space size='large'>
