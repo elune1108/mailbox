@@ -29,14 +29,14 @@ function App() {
       <Header className="header">
       <Row gutter={16}>
       <Col className="gutter-row" span={6}>
-        <div><h1 style={{color:"white", "font-size":"40px", "text-align":"left"}}>Tag Tool 1.0</h1></div>
+        <div><h1 style={{color:"white", "font-size":"40px", "text-align":"left"}}>Mail Tag Tool 1.0</h1></div>
       </Col>
       <Col className="gutter-row" span={6}>
       </Col>
       <Col className="gutter-row" span={6}>
       </Col>
       <Col className="gutter-row" span={6}>
-        <div style={{"text-align":'right'}}><Avatar size={40}>USER</Avatar></div>
+        <div style={{"text-align":'right'}}><Avatar size={40}>Tony</Avatar></div>
       </Col>
     </Row>
     </Header>

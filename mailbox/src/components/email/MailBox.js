@@ -1,4 +1,4 @@
-import {Table, Badge, Space, Button, Drawer, message} from 'antd';
+import {Table, Badge, Space, Button, Drawer, message, Tag} from 'antd';
 import React, {useEffect, useState} from "react";
 
 
@@ -47,8 +47,11 @@ export default function MailBox(props) {
                 if (emailKey === item.key) {
                     console.log('Fine the item ' + emailKey);
                     console.log(item.h_tags[tagName]);
-                    item.h_tags[tagName] = [...item.h_tags[tagName], userName];
-
+                    if (item.h_tags[tagName].includes(userName)){
+                        item.h_tags[tagName].splice(item.h_tags[tagName].indexOf(userName), 1)
+                    }else{
+                        item.h_tags[tagName] = [...item.h_tags[tagName], userName];
+                    }
                     return item;
                 }
                 return item;
@@ -132,6 +135,7 @@ export default function MailBox(props) {
 
     }
 
+    const colors = {"social":"green", "shopping":"cyan", "news":"magenta", "personal":"purple", "finance":"blue"}
 
     const columns = [
         {
@@ -151,13 +155,22 @@ export default function MailBox(props) {
             dataIndex: 'm_tags',
             key: 'm_tags',
             render: (m_tags) => (
-                <Badge count={0} >
-                    <Button size={'small'} shape="round" disabled={true}> {m_tags[props.currentModel]}</Button>
-                </Badge>
+                 <Tag color={colors[m_tags[props.currentModel]]}>{m_tags[props.currentModel]}</Tag>
+            )
+        },
+         {
+            title: 'Label',
+            // title: {props.currentModel},
+            dataIndex: 'label',
+            key: 'label',
+            render: (label) => (
+
+            <Tag color={colors[label]}>{label}</Tag>
+
             )
         },
         {
-            title: 'Tags',
+            title: 'Actions',
             dataIndex: 'h_tags',
             key: 'h_tags',
             render: (h_tags, record) => (
@@ -167,7 +180,7 @@ export default function MailBox(props) {
                         Object.keys(h_tags).map((key => {
                             return (
                                 <Badge count={h_tags[key].length} key={key}>
-                                    <Button onClick={() => updateVote(record.key, key, "W")} size={'small'} shape="round"> {key}</Button>
+                                    <Button type= {h_tags[key].includes("W")? "primary": "dashed"}onClick={() => updateVote(record.key, key, "W")} size={'small'} > {key} </Button>
                                 </Badge>
                             );
                         }))}
