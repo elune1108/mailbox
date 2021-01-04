@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css';
+import {Row, Col, Layout } from 'antd';
+import MailBox from "./components/email/MailBox";
+import ModelSelector from "./components/email/ModelSelector";
+import {useState} from "react";
+import Welcome from "./components/email/Welcome";
 
 function App() {
+
+  const [currentModel, setCurrentModel] = useState(null);
+
+  const handleModelChange = (query) => {
+    setCurrentModel(query);
+  }
+
+  const {Header, Content} = Layout;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <Layout>
+         <Header>Header Name Here</Header>
+         <Content>
+             <div className="App">
+                 <Row >
+                     <Col span={6}><ModelSelector onModelChange={handleModelChange} /></Col>
+                 </Row>
+                 <Row>
+                     <Col span={24}><MailBox currentModel={currentModel}/></Col>
+                 </Row>
+                 {/*  <Welcome/>*/}
+             </div>
+         </Content>
+     </Layout>
+
   );
 }
 
