@@ -9,6 +9,7 @@ export default function DataFilter(props) {
 
     function onChange(value) {
         setValue(value);
+        props.onQueryChange(value);
     }
 
     function onSearch(val) {

@@ -12,10 +12,15 @@ import LoginForm from "./components/email/LoginForm";
 function App() {
 
   const [currentModel, setCurrentModel] = useState(null);
+  const [currentQuery, setCurrentQuery] = useState(null);
 
   const handleModelChange = (query) => {
     setCurrentModel(query);
   }
+
+    const handleQueryChange = (query) => {
+        setCurrentQuery(query);
+    }
 
   const {Header, Content} = Layout;
 
@@ -43,12 +48,14 @@ function App() {
                         <DatasetSelector />
                      </Col>
                      <Col span={12}>
-                        <DataFilter />
+                        <DataFilter onQueryChange={handleQueryChange}/>
                      </Col>
                      <Col span={6}><ModelSelector onModelChange={handleModelChange} /></Col>
                  </Row>
                  <Row>
-                     <Col span={24} style={{"textAlign":"right"}}><MailBox currentModel={currentModel}/></Col>
+                     <Col span={24} style={{"textAlign":"right"}}>
+                         <MailBox currentModel={currentModel} currentQuery={currentQuery}/>
+                     </Col>
                  </Row>
              </div>
          </Content>

@@ -1,5 +1,5 @@
-import React, { useState} from 'react';
-import { Button, Popover, Form, Input, Avatar} from 'antd';
+import React, {useState} from 'react';
+import {Button, Popover, Form, Input, Avatar} from 'antd';
 
 
 export default function LoginForm() {
@@ -21,7 +21,7 @@ export default function LoginForm() {
     };
 
     const [visible, setVisible] = useState(false);
-  //  const [visible, setVisible] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const hide = () => {
         setVisible(false);
@@ -34,7 +34,8 @@ export default function LoginForm() {
 
     const onFinish = (values) => {
         console.log('Success:', values);
-         hide();
+        hide();
+        setLoggedIn(true);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -45,24 +46,24 @@ export default function LoginForm() {
         <Form
             {...layout}
             name="basic"
-            initialValues={{ remember: true }}
+            initialValues={{remember: true}}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
         >
             <Form.Item
                 label="Username"
                 name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{required: true, message: 'Please input your username!'}]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
             <Form.Item
                 label="Password"
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[{required: true, message: 'Please input your password!'}]}
             >
-                <Input.Password />
+                <Input.Password/>
             </Form.Item>
 
             <Form.Item {...tailLayout}>
@@ -86,9 +87,15 @@ export default function LoginForm() {
         </Popover>
     )
 
-    const logoutDialog = (<Avatar size={40}>myUserName</Avatar>)
+    const logoutDialog = (<Avatar>M</Avatar>)
 
+    {
+        if (loggedIn) {
+            return logoutDialog
+        } else {
+            return loginDialog
+        }
 
+    }
 
-    return (loginDialog)
 }

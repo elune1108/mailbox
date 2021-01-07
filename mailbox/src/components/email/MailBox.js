@@ -83,16 +83,18 @@ export default function MailBox(props) {
 
 
     useEffect(() => {
-        const url =
-            'http://192.168.86.48:5000/v1/mails';
-
-        fetch(url)
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({query: props.currentQuery})
+        };
+        const response =  fetch('http://192.168.86.48:5000/v1/mails/query' , requestOptions)
             .then((result) => result.json())
-            .then((result) => {
-                console.log(result[0]);
+            .then( (result) => {
                 setData(result);
-            })
-    }, [])
+            });
+
+    }, [props.currentQuery])
 
     let emailModelContent;
     if (currentEmail) {
