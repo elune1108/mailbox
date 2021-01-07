@@ -42,7 +42,7 @@ export default function MailBox(props) {
     )
 
 
-    const vote = (emailKey, tagName, userName) => {
+    const vote = (emailKey, tagName, userName, label) => {
         setData(data.map(item => {
                 if (emailKey === item.key) {
                     console.log('Fine the item ' + emailKey);
@@ -52,6 +52,7 @@ export default function MailBox(props) {
                     }else{
                         item.h_tags[tagName] = [...item.h_tags[tagName], userName];
                     }
+                    item.label = label
                     return item;
                 }
                 return item;
@@ -75,7 +76,7 @@ export default function MailBox(props) {
             message.error(error);
             return Promise.reject(error);
         }
-        vote(emailKey, tagName, userName);
+        vote(emailKey, tagName, userName, data.label);
 
 
     }
@@ -170,7 +171,7 @@ export default function MailBox(props) {
             )
         },
         {
-            title: 'Actions',
+            title: 'Annotation',
             dataIndex: 'h_tags',
             key: 'h_tags',
             render: (h_tags, record) => (
@@ -187,6 +188,7 @@ export default function MailBox(props) {
                 </Space>
             )
         },
+
     ];
 
 

@@ -11,6 +11,8 @@ import {
 } from '@ant-design/icons';
 import MailBox from "./components/email/MailBox";
 import ModelSelector from "./components/email/ModelSelector";
+import DatasetSelector from "./components/email/DatasetSelector";
+import DataFilter from "./components/email/DataFilter";
 import {useState} from "react";
 import Welcome from "./components/email/Welcome";
 
@@ -43,7 +45,12 @@ function App() {
          <Content>
              <div className="App">
                  <Row >
-                 <Col span={18}></Col>
+                     <Col span={6}>
+                        <DatasetSelector />
+                     </Col>
+                     <Col span={12}>
+                        <DataFilter />
+                     </Col>
                      <Col span={6}><ModelSelector onModelChange={handleModelChange} /></Col>
                  </Row>
                  <Row>
