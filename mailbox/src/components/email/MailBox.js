@@ -183,7 +183,7 @@ export default function MailBox(props) {
                         Object.keys(h_tags).map((key => {
                             return (
                                 <Badge count={h_tags[key].length} key={key}>
-                                    <Button type= {h_tags[key].includes("W")? "primary": "dashed"}onClick={() => updateVote(record.key, key, "W")} size={'small'} > {key} </Button>
+                                    <Button type= {h_tags[key].includes(props.username)? "primary": "dashed"}onClick={() => updateVote(record.key, key, props.username)} size={'small'} > {key} </Button>
                                 </Badge>
                             );
                         }))}
@@ -208,6 +208,7 @@ export default function MailBox(props) {
         >
             {emailModelContent}
         </Drawer>
+        <h2>username is {props.username}</h2>
 
     </>;
 

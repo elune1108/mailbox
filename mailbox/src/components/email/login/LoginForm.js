@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import {Button, Popover, Form, Input, Avatar} from 'antd';
+import {Button, Popover, Form, Input} from 'antd';
 
-
-export default function LoginForm() {
-
+export default function LoginForm(props) {
 
     const layout = {
         labelCol: {
@@ -20,22 +18,18 @@ export default function LoginForm() {
         },
     };
 
-    const [visible, setVisible] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loginVisible, setLoginVisible] = useState(false);
 
-    const hide = () => {
-        setVisible(false);
-    };
-
-    const handleVisibleChange = visible => {
-        setVisible(visible);
+    const handleLoginVisibleChange = loginVisible => {
+        setLoginVisible(loginVisible);
     };
 
 
     const onFinish = (values) => {
         console.log('Success:', values);
-        hide();
-        setLoggedIn(true);
+        setLoginVisible(false);
+        props.handleLoginClick(values.username)
+
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -76,26 +70,15 @@ export default function LoginForm() {
 
 
     const loginDialog = (<Popover
-            // content={<a onClick={hide}>Close</a>}
             content={loginForm}
-            //  title="Title"
             trigger="click"
-            visible={visible}
-            onVisibleChange={handleVisibleChange}
+            visible={loginVisible}
+            onVisibleChange={handleLoginVisibleChange}
         >
-            <Button type="primary">Login</Button>
+            <Button type="primary">Log In</Button>
         </Popover>
     )
 
-    const logoutDialog = (<Avatar>M</Avatar>)
-
-    {
-        if (loggedIn) {
-            return logoutDialog
-        } else {
-            return loginDialog
-        }
-
-    }
+    return loginDialog
 
 }

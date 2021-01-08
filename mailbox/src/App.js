@@ -1,67 +1,77 @@
 import './App.css';
 import 'antd/dist/antd.css';
-import {Row, Col, Layout } from 'antd';
+import {Row, Col, Layout} from 'antd';
 
 import MailBox from "./components/email/MailBox";
 import ModelSelector from "./components/email/ModelSelector";
 import DatasetSelector from "./components/email/DatasetSelector";
 import DataFilter from "./components/email/DataFilter";
 import {useState} from "react";
-import LoginForm from "./components/email/LoginForm";
+import LoginControl from "./components/email/login/LoginControl";
+import Cookies from 'js-cookie';
 
 function App() {
 
-  const [currentModel, setCurrentModel] = useState(null);
-  const [currentQuery, setCurrentQuery] = useState(null);
+    const [currentModel, setCurrentModel] = useState(null);
+    const [currentQuery, setCurrentQuery] = useState(null);
+    const [username, setUsername] = useState(Cookies.get("username"));
 
-  const handleModelChange = (query) => {
-    setCurrentModel(query);
-  }
+
+    const handleModelChange = (query) => {
+        setCurrentModel(query);
+    }
 
     const handleQueryChange = (query) => {
         setCurrentQuery(query);
     }
 
-  const {Header, Content} = Layout;
+    const handleUsernameChange = (username) => {
+        setUsername(username);
+    }
+
+    const {Header, Content} = Layout;
+
+    return (
+        <Layout>
+            <Header className="header">
+                <Row gutter={16}>
+                    <Col className="gutter-row" span={6}>
+                        <div><h1 style={{color: "white", "fontSize": "40px", "textAlign": "left"}}>Mail Tag Tool
+                            1.0</h1></div>
+                    </Col>
+                    <Col className="gutter-row" span={6}>
+                    </Col>
+                    <Col className="gutter-row" span={6}>
+                    </Col>
+                    <Col className="gutter-row" span={6}>
+                        <LoginControl onUsernameChange={handleUsernameChange}/>
 
 
-  return (
-     <Layout>
-      <Header className="header">
-      <Row gutter={16}>
-      <Col className="gutter-row" span={6}>
-        <div><h1 style={{color:"white", "fontSize":"40px", "textAlign":"left"}}>Mail Tag Tool 1.0</h1></div>
-      </Col>
-      <Col className="gutter-row" span={6}>
-      </Col>
-      <Col className="gutter-row" span={6}>
-      </Col>
-      <Col className="gutter-row" span={6}>
-          <LoginForm/>
-      </Col>
-    </Row>
-    </Header>
-         <Content>
-             <div className="App">
-                 <Row >
-                     <Col span={6}>
-                        <DatasetSelector />
-                     </Col>
-                     <Col span={12}>
-                        <DataFilter onQueryChange={handleQueryChange}/>
-                     </Col>
-                     <Col span={6}><ModelSelector onModelChange={handleModelChange} /></Col>
-                 </Row>
-                 <Row>
-                     <Col span={24} style={{"textAlign":"right"}}>
-                         <MailBox currentModel={currentModel} currentQuery={currentQuery}/>
-                     </Col>
-                 </Row>
-             </div>
-         </Content>
-     </Layout>
 
-  );
+                    </Col>
+                </Row>
+            </Header>
+            <Content>
+                <div className="App">
+                    <Row>
+                        <Col span={6}>
+                            <DatasetSelector/>
+                        </Col>
+                        <Col span={12}>
+                            <DataFilter onQueryChange={handleQueryChange}/>
+                        </Col>
+                        <Col span={6}><ModelSelector onModelChange={handleModelChange}/></Col>
+                    </Row>
+                    <Row>
+                        <Col span={24} style={{"textAlign": "right"}}>
+                            <MailBox currentModel={currentModel} currentQuery={currentQuery} username={username}/>
+                        </Col>
+                    </Row>
+                </div>
+            </Content>
+        </Layout>
+
+    );
 }
 
 export default App;
