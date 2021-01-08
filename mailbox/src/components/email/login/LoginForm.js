@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Popover, Form, Input} from 'antd';
+import {Button, Popover, Form, Input, message} from 'antd';
 
 export default function LoginForm(props) {
 
@@ -25,8 +25,23 @@ export default function LoginForm(props) {
     };
 
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log('Success:', values);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username: values.username, password: values.password})
+        };
+        const response = await fetch('http://192.168.86.48:5000/v1/users/login', requestOptions);
+        const data = await response.json();
+
+        if (!response.ok) {
+            const error = (data && data.message) || response.status;
+            message.error(error);
+            return Promise.reject(error);
+        }
+
         setLoginVisible(false);
         props.handleLoginClick(values.username)
 
