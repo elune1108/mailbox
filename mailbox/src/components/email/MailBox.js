@@ -95,9 +95,9 @@ export default function MailBox(props) {
 
     let emailModelContent;
     if (currentEmail) {
-        emailModelContent = <table>
+        emailModelContent = <table cellPadding={5}>
             <tr>
-                <th>Id:</th>
+                <th style={{"width": "150px"}}>Id:</th>
                 <td>{currentEmail.key}</td>
             </tr>
             <tr>
@@ -128,8 +128,12 @@ export default function MailBox(props) {
             </tr>
 
             <tr>
-                <th>Content:</th>
+                <th valign={"top"}>Content:</th>
                 <td>{currentEmail.content}</td>
+             {/*  <td>
+                   <div dangerouslySetInnerHTML={{__html: currentEmail.content.replace(/(<? *script)/gi, 'illegalscript')}} >
+                   </div>
+               </td>*/}
             </tr>
         </table>
 

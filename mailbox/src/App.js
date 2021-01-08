@@ -46,7 +46,7 @@ function App() {
             </Header>
             <Content>
                 <div className="App" style={{"marginTop": "10px", "marginLeft": "10px", "marginRight": "10px"}}>
-                    <Row gutter={[16, 8]}>
+                    <Row gutter={[8, 0]}>
                         <Col span={6}>
                             <DatasetSelector/>
                         </Col>
