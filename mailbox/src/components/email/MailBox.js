@@ -1,5 +1,6 @@
 import {Table, Badge, Space, Button, Drawer, message, Tag} from 'antd';
 import React, {useEffect, useState} from "react";
+import config from "../../Config";
 
 
 export default function MailBox(props) {
@@ -17,14 +18,12 @@ export default function MailBox(props) {
 
     const showEmailContent = (emailKey) => {
         const url =
-            'http://192.168.86.48:5000/v1/mail/' + emailKey;
+            config.apiEndpoint + '/v1/mail/' + emailKey;
 
         fetch(url)
             .then((result) => result.json())
             .then((result) => {
-                // console.log(result[0]);
                 setCurrentEmail(result[0]);
-                //   console.log('~~~ key: ' + result[0].key);
 
             })
 
@@ -32,9 +31,7 @@ export default function MailBox(props) {
     };
 
     useEffect(() => {
-            // console.log('~~~ currentEmail: ' + currentEmail);
             if (currentEmail) {
-                console.log('~~~currentEmail key ' + currentEmail.key);
                 setVisible(true);
             }
 
@@ -66,7 +63,7 @@ export default function MailBox(props) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({user: userName, category: tagName})
         };
-        const response = await fetch('http://192.168.86.48:5000/v1/mail/' + emailKey, requestOptions);
+        const response = await fetch(config.apiEndpoint + '/v1/mail/' + emailKey, requestOptions);
         const data = await response.json();
 
         // check for error response
@@ -88,7 +85,7 @@ export default function MailBox(props) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({query: props.currentQuery})
         };
-        const response =  fetch('http://192.168.86.48:5000/v1/mails/query' , requestOptions)
+        const response =  fetch(config.apiEndpoint + '/v1/mails/query' , requestOptions)
             .then((result) => result.json())
             .then( (result) => {
                 setData(result);

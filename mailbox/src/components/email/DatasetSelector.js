@@ -1,5 +1,6 @@
 import {Form, Select} from 'antd';
 import React, {useEffect, useState} from "react";
+import config from "../../Config";
 
 export default function DatasetSelector(props) {
     const {Option} = Select;
@@ -9,7 +10,6 @@ export default function DatasetSelector(props) {
 
     function onChange(value) {
         setValue(value);
-        //props.onModelChange(value)
     }
 
     function onSearch(val) {
@@ -20,7 +20,7 @@ export default function DatasetSelector(props) {
     useEffect(() => {
 
         const url =
-            'http://192.168.86.48:5000/v1/datasets';
+            config.apiEndpoint + '/v1/datasets';
 
         fetch(url)
             .then((result) => result.json())

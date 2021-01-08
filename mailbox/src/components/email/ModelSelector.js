@@ -1,5 +1,6 @@
 import {Form, Select} from 'antd';
 import React, {useEffect, useState} from "react";
+import config from "../../Config";
 
 export default function ModelSelector(props) {
     const {Option} = Select;
@@ -20,7 +21,7 @@ export default function ModelSelector(props) {
     useEffect(() => {
 
         const url =
-            'http://192.168.86.48:5000/v1/models';
+            config.apiEndpoint + '/v1/models';
 
         fetch(url)
             .then((result) => result.json())

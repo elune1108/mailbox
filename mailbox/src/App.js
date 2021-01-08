@@ -35,25 +35,18 @@ function App() {
         <Layout>
             <Header className="header">
                 <Row gutter={16}>
-                    <Col className="gutter-row" span={6}>
-                        <div><h1 style={{color: "white", "fontSize": "40px", "textAlign": "left"}}>Mail Tag Tool
+                    <Col className="gutter-row" span={22}>
+                        <div><h1 style={{color: "white", "fontSize": "34px", "textAlign": "left"}}>Mail Tag Tool
                             1.0</h1></div>
                     </Col>
-                    <Col className="gutter-row" span={6}>
-                    </Col>
-                    <Col className="gutter-row" span={6}>
-                    </Col>
-                    <Col className="gutter-row" span={6}>
+                    <Col className="gutter-row" span={2}>
                         <LoginControl onUsernameChange={handleUsernameChange}/>
-
-
-
                     </Col>
                 </Row>
             </Header>
             <Content>
-                <div className="App">
-                    <Row>
+                <div className="App" style={{"marginTop": "10px", "marginLeft": "10px", "marginRight": "10px"}}>
+                    <Row gutter={[16, 8]}>
                         <Col span={6}>
                             <DatasetSelector/>
                         </Col>

@@ -1,5 +1,6 @@
 import {Form, Select} from 'antd';
 import React, {useEffect, useState} from "react";
+import config from "../../Config";
 
 export default function DataFilter(props) {
     const {Option} = Select;
@@ -20,7 +21,7 @@ export default function DataFilter(props) {
     useEffect(() => {
 
         const url =
-            'http://192.168.86.48:5000/v1/queries';
+            config.apiEndpoint + '/v1/queries';
 
         fetch(url)
             .then((result) => result.json())
@@ -40,7 +41,7 @@ export default function DataFilter(props) {
                 label="Select Query">
                 <Select
                     showSearch
-                    style={{width: 600}}
+                   // style={{width: 600}}
                     placeholder="Select a query"
                     optionFilterProp="children"
                     value={value}
